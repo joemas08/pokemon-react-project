@@ -1,7 +1,6 @@
-import { ChangeEvent, ImgHTMLAttributes, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { AttribueList } from './AttributeList'
 import Axios from 'axios'
-import Helmet from 'react-helmet'
 
 import './PokemonPage.css'
 
@@ -39,6 +38,7 @@ export const PokemonPage = () => {
             onChange={(event: ChangeEvent<HTMLInputElement>): void =>
               setPokemon(event.target.value)
             }
+            placeholder='Pokemon Name or ID...'
           />
           <button onClick={() => sendPokemonRequest(pokemon)}> Search </button>
         </div>
