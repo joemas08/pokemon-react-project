@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState, useEffect } from 'react'
 import { AttribueList } from './AttributeList'
 import Axios from 'axios'
 
@@ -13,23 +13,28 @@ export const PokemonPage = () => {
   const [pokemonImage, setPokemonImage] = useState<string>('')
   const [pokemonColor, setPokemonColor] = useState<string>('')
 
-  const sendPokemonRequest = (pokemon: string) => {
+  const sendPokemonRequest = async (pokemon: string) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`
 
-    Axios.get(url).then((pokemon) => {
+    await Axios.get(url).then((pokemon) => {
       setPokemonName(pokemon.data.name)
       setPokemonID(pokemon.data.id)
       setPokemonType(pokemon.data.types[0].type.name)
       setPokemonImage(pokemon.data.sprites.front_default)
     })
+
     const descriptionURL = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`
-    Axios.get(descriptionURL).then((pokemon) => {
+    await Axios.get(descriptionURL).then((pokemon) => {
       console.log(pokemon)
       setPokemonDescription(pokemon.data.flavor_text_entries[2].flavor_text)
       setPokemonColor(pokemon.data.color.name)
     })
-    document.documentElement.style.setProperty('background-color', pokemonColor)
   }
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('background-color', pokemonColor)
+  }, [pokemonColor])
+
   return (
     <>
       <div className='form'>
@@ -40,7 +45,9 @@ export const PokemonPage = () => {
             }
             placeholder='Pokemon Name or ID...'
           />
-          <button onClick={() => sendPokemonRequest(pokemon)}> Search </button>
+          <button onClick={() => sendPokemonRequest(pokemon.toLowerCase())}>
+            Search
+          </button>
         </div>
         <AttribueList
           name={pokemonName}
