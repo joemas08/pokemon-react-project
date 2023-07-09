@@ -2,6 +2,7 @@ interface Pokemon {
   name: string
   id: string
   type: string
+  generation: string
   description: string
   image: string
 }
@@ -10,6 +11,15 @@ export const AttribueList = (props: Pokemon) => {
   return (
     <div className='attributeList'>
       <img src={props.image}></img>
+      <div className='attribute'>
+        <input
+          type='text'
+          id='generation'
+          readOnly={true}
+          placeholder={props.generation}
+        />
+        <label htmlFor='Type'>Gen.</label>
+      </div>
       <div className='attribute'>
         <input type='text' id='ID' readOnly={true} placeholder={props.id} />
         <label htmlFor='ID'>ID</label>

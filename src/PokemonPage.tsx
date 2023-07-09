@@ -9,6 +9,7 @@ export const PokemonPage = () => {
   const [pokemonName, setPokemonName] = useState<string>('')
   const [pokemonID, setPokemonID] = useState<string>('')
   const [pokemonDescription, setPokemonDescription] = useState<string>('')
+  const [pokemonGeneration, setPokemonGeneration] = useState<string>('')
   const [pokemonType, setPokemonType] = useState<string>('')
   const [pokemonImage, setPokemonImage] = useState<string>('')
   const [pokemonColor, setPokemonColor] = useState<string>('')
@@ -23,9 +24,13 @@ export const PokemonPage = () => {
       setPokemonImage(pokemon.data.sprites.front_default)
     })
 
+    const generationURL = `https://pokeapi.co/api/v2/ability/${pokemon}/`
+    await Axios.get(generationURL).then((pokemon) => {
+      setPokemonGeneration(pokemon.data.generation.name)
+    })
+
     const descriptionURL = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`
     await Axios.get(descriptionURL).then((pokemon) => {
-      console.log(pokemon)
       setPokemonDescription(pokemon.data.flavor_text_entries[2].flavor_text)
       setPokemonColor(pokemon.data.color.name)
     })
@@ -53,6 +58,7 @@ export const PokemonPage = () => {
           name={pokemonName}
           id={pokemonID}
           type={pokemonType}
+          generation={pokemonGeneration}
           description={pokemonDescription}
           image={pokemonImage}
         />
