@@ -24,7 +24,7 @@ export const PokemonPage = () => {
       setPokemonImage(pokemon.data.sprites.front_default)
     })
 
-    const generationURL = `https://pokeapi.co/api/v2/ability/${pokemon}/`
+    const generationURL = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`
     await Axios.get(generationURL).then((pokemon) => {
       setPokemonGeneration(pokemon.data.generation.name)
     })
