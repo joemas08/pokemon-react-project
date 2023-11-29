@@ -7,8 +7,8 @@ Explore the world of Pokemon with this TypeScript React app that fetches data fr
 
 ## Demo
 
-![Pokemon Details](/demo-screenshot1.png)
-![Pokemon Details](/demo-screenshot2.png)
+![Pokemon Details](/public/demo-screenshot1.png)
+![Pokemon Details](/public/demo-screenshot2.png)
 
 ## Features
 
