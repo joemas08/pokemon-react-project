@@ -7,8 +7,9 @@ Explore the world of Pokemon with this TypeScript React app that fetches data fr
 
 ## Demo
 
+View the deployed app in your web browser [pokemon-react-project](https://joemas08.github.io/pokemon-react-project/)
+
 ![Pokemon Details](/public/demo-screenshot1.png)
-![Pokemon Details](/public/demo-screenshot2.png)
 
 ## Features
 
