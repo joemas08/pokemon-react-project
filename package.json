@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://joemas08.github.io/pokemon-react-project",
+  "homepage": "https://joemas08.github.io/pokemon-react-project/",
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
