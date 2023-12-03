@@ -36,6 +36,20 @@ export const PokemonPage = () => {
     })
   }
 
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setPokemon(event.target.value)
+  }
+
+  const handleButtonClick = () => {
+    sendPokemonRequest(pokemon.toLowerCase())
+  }
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>): void => {
+    if (event.key === 'Enter') {
+      sendPokemonRequest(pokemon.toLowerCase())
+    }
+  }
+
   useEffect(() => {
     document.documentElement.style.setProperty('background-color', pokemonColor)
   }, [pokemonColor])
@@ -45,14 +59,11 @@ export const PokemonPage = () => {
       <div className='form'>
         <div className='searchInput'>
           <input
-            onChange={(event: ChangeEvent<HTMLInputElement>): void =>
-              setPokemon(event.target.value)
-            }
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
             placeholder='Pokemon Name or ID...'
           />
-          <button onClick={() => sendPokemonRequest(pokemon.toLowerCase())}>
-            Search
-          </button>
+          <button onClick={handleButtonClick}>Search</button>
         </div>
         <AttribueList
           name={pokemonName}
