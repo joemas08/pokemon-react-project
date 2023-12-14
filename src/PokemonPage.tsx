@@ -37,8 +37,8 @@ export const PokemonPage = () => {
   }
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (event.target.value != "") {
-        setPokemon(event.target.value)
+    if (event.target.value != '') {
+      setPokemon(event.target.value)
     }
   }
 
