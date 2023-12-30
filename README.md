@@ -1,9 +1,12 @@
-# Pokemon React Project
+<div align="center">
+<h1>Pokemon React Project</h1>
 
 [![React](https://img.shields.io/badge/React-17.0.2-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-4.4.3-blue.svg)](https://www.typescriptlang.org/)
 
 Explore the world of Pokemon with this TypeScript React app that fetches data from the [Pokemon API](https://pokeapi.co/)
+</div>
+
 
 ## Demo
 
