@@ -12,29 +12,39 @@ export const PokemonPage = () => {
   const [pokemonGeneration, setPokemonGeneration] = useState<string>('')
   const [pokemonType, setPokemonType] = useState<string>('')
   const [pokemonImage, setPokemonImage] = useState<string>('')
-  const [pokemonColor, setPokemonColor] = useState<string>('')
+  const [pokemonColor, setPokemonColor] = useState<string>('ffffff')
+  const [loading, setLoading] = useState<boolean>(false)
 
   const sendPokemonRequest = async (pokemon: string) => {
-    const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`
+    setLoading(true)
+    try {
 
-    await Axios.get(url).then((pokemon) => {
-      setPokemonName(pokemon.data.name)
-      setPokemonID(pokemon.data.id)
-      setPokemonType(pokemon.data.types[0].type.name)
-      setPokemonImage(pokemon.data.sprites.front_default)
-    })
+    
+        const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`
 
-    const generationURL = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`
-    await Axios.get(generationURL).then((pokemon) => {
-      setPokemonGeneration(pokemon.data.generation.name)
-    })
+        await Axios.get(url).then((pokemon) => {
+          setPokemonName(pokemon.data.name)
+          setPokemonID(pokemon.data.id)
+          setPokemonType(pokemon.data.types[0].type.name)
+          setPokemonImage(pokemon.data.sprites.front_default)
+        })
 
-    const descriptionURL = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`
-    await Axios.get(descriptionURL).then((pokemon) => {
-      setPokemonDescription(pokemon.data.flavor_text_entries[2].flavor_text)
-      setPokemonColor(pokemon.data.color.name)
-    })
-  }
+        const generationURL = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`
+        await Axios.get(generationURL).then((pokemon) => {
+          setPokemonGeneration(pokemon.data.generation.name)
+        })
+
+        const descriptionURL = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`
+        await Axios.get(descriptionURL).then((pokemon) => {
+          setPokemonDescription(pokemon.data.flavor_text_entries[2].flavor_text)
+          setPokemonColor(pokemon.data.color.name)
+        })
+    } catch(error) {
+        console.error("Error fetching data:", error)
+    } finally {
+        setLoading(false)
+    }
+  } 
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.value != '') {
@@ -58,7 +68,9 @@ export const PokemonPage = () => {
 
   return (
     <>
-      <div className='form'>
+    <div className={`form ${loading ? 'loading' : ''}`}>
+      {/* Loading spinner */}
+      {loading && <div className="spinner"></div>}
         <div className='searchInput'>
           <input
             onChange={handleInputChange}
